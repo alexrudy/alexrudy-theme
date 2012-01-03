@@ -1,5 +1,35 @@
 <?php
 
+function twentyten_setup()
+{
+  
+	// This theme styles the visual editor with editor-style.css to match the theme style.
+	add_editor_style();
+
+	// Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories.
+	add_theme_support( 'post-formats', array( 'aside', 'link' , 'gallery') );
+
+	// This theme uses post thumbnails
+	add_theme_support( 'post-thumbnails' );
+
+	// Add default posts and comments RSS feed links to head
+	add_theme_support( 'automatic-feed-links' );
+
+	// Make theme available for translation
+	// Translations can be filed in the /languages/ directory
+	load_theme_textdomain( 'twentyten', get_template_directory() . '/languages' );
+
+	$locale = get_locale();
+	$locale_file = get_template_directory() . "/languages/$locale.php";
+	if ( is_readable( $locale_file ) )
+		require_once( $locale_file );
+
+	// This theme uses wp_nav_menu() in one location.
+	register_nav_menus( array(
+		'primary' => __( 'Primary Navigation', 'twentyten' ),
+	) );
+
+}
 
 function alexrudyCredit()
 {
@@ -38,7 +68,7 @@ function img_shortcode_arudy($value, $attr, $content = null)
 {
   extract(shortcode_atts(array(
 		'id'	=> '',
-		'align'	=> 'alignnone',
+		'align'	=> 'aligncenter',
 		'width'	=> '',
 		'caption' => ''
 	), $attr));
@@ -46,7 +76,7 @@ function img_shortcode_arudy($value, $attr, $content = null)
 	if ( empty($caption) )
 		return $content;
   
-	if ( $id ) $id = 'id="' . esc_attr($id) . '" ';
+	if ( $id != '' ) $id = 'id="' . esc_attr($id) . '" ';
   
   if ( 50 < (int) $width ) {
     return '<div ' . $id . 'class="wp-caption ' . esc_attr($align) . '" style="width: ' . (10 + (int) $width) . 'px">' . do_shortcode( $content ) . '<p class="wp-caption-text">' . $caption . '</p></div>';
@@ -57,5 +87,7 @@ function img_shortcode_arudy($value, $attr, $content = null)
 }
 
 add_filter('img_caption_shortcode','img_shortcode_arudy',10,3);
+
+remove_action( 'init', 'ilap_create_instapaper_type' );
 
 ?>

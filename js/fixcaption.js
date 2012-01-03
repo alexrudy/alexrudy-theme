@@ -8,14 +8,26 @@
 
 function set_caption_width () {
 	jQuery('.wp-caption').each(function(index,element){
-		var width = jQuery(this).children().children().outerWidth();
+		
+		// Remove p tags which end up around iframe objects
+		tag = jQuery(this).find('iframe').prev('p')
+		if (tag.is(':empty')) {
+			tag.remove();
+		}
+		tag = jQuery(this).find('iframe').next('p')
+		if (tag.is(':empty')) {
+			tag.remove();
+		}
+		
+		
+		// Fix Width Problems
+		var width = jQuery(this).find('img').outerWidth();
+		width = width || jQuery(this).find('iframe').outerWidth()
 		if (width > 50) {
 			jQuery(this).css('width',width+10);
 		} else {
-			var boxWidth = jQuery(this).children().outerWidth();
-			if (boxWidth > 50 ) {
-				jQuery(this).css('width',boxWidth+10)
-			};
+			var width = jQuery(this).children().outerWidth();
+			if (width > 50 ) { jQuery(this).css('width',width+10); };
 		};
 	});
 }

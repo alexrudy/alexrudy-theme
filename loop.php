@@ -57,7 +57,7 @@
 
 <?php /* How to display posts in the Gallery category. */ ?>
 
-	<?php if ( in_category( _x('gallery', 'gallery category slug', 'twentyten') ) ) : ?>
+	<?php if ( ( function_exists( 'get_post_format' ) && 'gallery' == get_post_format( $post->ID ) ) || in_category( _x('gallery', 'gallery category slug', 'twentyten') ) ) : ?>
 		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'twentyten' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 
@@ -96,7 +96,7 @@
 
 <?php /* How to display posts in the asides category */ ?>
 
-	<?php elseif ( in_category( array('links' , _x('asides', 'asides category slug', 'twentyten') ) ) ) : ?>
+	<?php elseif ( function_exists( 'get_post_format' ) && 'aside' == get_post_format( $post->ID ) ) : ?>
 		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
       <h3 class="aside-title entry-title"><a href="<?php if ( is_linked_list() ) :
         the_linked_list_link(); 
@@ -123,6 +123,26 @@
 		    <span class="meta-sep">|</span>
 				<?php twentyten_posted_on(); ?>
 				<?php edit_post_link( __( 'Edit', 'twentyten' ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
+			</div><!-- .entry-utility -->
+		</div><!-- #post-## -->
+
+<?php /* How to display posts in the links category */ ?>
+
+	<?php elseif ( function_exists( 'get_post_format' ) && 'link' == get_post_format( $post->ID ) ) : ?>
+		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+      <h3 class="short-title entry-title"><a href="<?php if ( is_linked_list() ) :
+        the_linked_list_link(); 
+      else : 
+        the_permalink(); 
+      endif; ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'twentyten' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php 
+      if ( is_linked_list() ) :
+        echo insert_title_glyph_rss(get_the_title(),false);
+      else :
+        the_title();
+      endif; ?></a></h3>
+
+			<div class="entry-utility">
+				<p>Linked on <a href="<?php the_permalink(); ?>" title="<?php the_time(); ?>"><span class="entry-date"><?php the_date(); ?></span></a></p>
 			</div><!-- .entry-utility -->
 		</div><!-- #post-## -->
 

@@ -5,12 +5,10 @@ Description:    Alex Rudy's Homepage Theme
 Author:         Alexander Rudy
 Author URI:     http://about.me/alexrudy
 Template:       twentyten
-Version:        0.1
+Version:        0.1.1
 */
 
 @import url("../twentyten/style.css");
-
-
 
 /*=FONTS  */
 
@@ -59,9 +57,18 @@ code {
 	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 }
 
+#access {
+    max-width: 940px;
+    width: 100%;
+}
+
+#access .menu-header, div.menu, #colophon, #branding, #main, #wrapper {
+    max-width: 940px;
+    width: auto;
+}
 #site-title a {
 	color: #7e84cc;
-	font-size: 70px;
+	font-size: 2.7em;
 	font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
 	font-weight: lighter;
 }
@@ -120,8 +127,25 @@ h3.entry-title a:link {
 	border-bottom: 1px dotted;
 }
 
+h3.short-title a:link {
+	border-bottom: 1px solid;
+	font-size: 18px;
+}
+
 blockquote {
 	border-left: 6px solid rgb(51,51,51);
+}
+
+.wp-caption {
+	padding-top:10px;
+}
+
+#content p.wp-caption-text {
+    margin-bottom: 5px;
+}
+
+#content #entry-author-info {
+	background-color: #000;
 }
 
 /*= Background Stuff */
@@ -211,3 +235,56 @@ body {
 	clear: both;
 }
 
+.findmeontheweb {
+	line-height: 20px;
+}
+
+ul.findmeontheweb {
+	margin-left: 0px !important;
+}
+
+.findmeontheweb li {
+	list-style: none;
+}
+
+.findmeontheweb img {
+	background: #FFFFFF;
+	width: 16px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+@media screen and (max-width: 1000px) {
+    #primary.widget-area, #secondary.widget-area, #site-description {
+        display: none;
+        visibility: hidden;
+    }
+    #container {
+        margin-right: 0px;
+    }
+    
+    #content {
+        margin-right: 20px;
+    }
+    #access {
+        max-width: 660px;
+        width: 100%;
+    }
+
+    #access .menu-header, div.menu, #colophon, #branding, #main, #wrapper {
+        max-width: 660px;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    #site-title a {
+        font-size: 2.0em;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #site-title a {
+        font-size: 1.5em;
+    }
+}
