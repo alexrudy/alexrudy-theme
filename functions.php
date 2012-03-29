@@ -60,6 +60,9 @@ add_action('wp_print_footer_scripts','googleAnalytics');
 function init_ar_scripts()
 {
   wp_enqueue_script( 'fix_caption_width' , content_url('/themes/alexrudy/js/fixcaption.js',__FILE__) , array('jquery') , '1.0');
+  // wp_enqueue_script( 'hideshow-social' , content_url('/themes/alexrudy/js/hideshow-social.js',__FILE__) , array('jquery') , '1.0');
+   define('SOCIAL_COMMENTS_JS',content_url('/themes/alexrudy/js/hideshow-social.js',__FILE__));
+  
 }
 
 add_action('init','init_ar_scripts');

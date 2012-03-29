@@ -254,6 +254,12 @@ ul.findmeontheweb {
 	margin-right: 5px;
 }
 
+#social {
+/*	background: rgba(255,255,255,0.9) !important;*/
+	padding: 10px 15px;
+}
+
+
 @media screen and (max-width: 1000px) {
     #primary.widget-area, #secondary.widget-area, #site-description {
         display: none;
